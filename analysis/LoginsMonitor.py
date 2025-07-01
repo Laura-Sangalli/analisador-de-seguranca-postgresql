@@ -7,8 +7,6 @@ class LoginMonitor:
         self.user = user
         self.password = password
         self.port = port
-        self.conn = None
-        self.cur = None
     
     def connect(self):
         try:

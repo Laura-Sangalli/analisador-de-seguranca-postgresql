@@ -1,1 +1,3 @@
-- verificar situação senhas usuários 
+
+
+[!] USUÁRIOS ENCONTRADOS:

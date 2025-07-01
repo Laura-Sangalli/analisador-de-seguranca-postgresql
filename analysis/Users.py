@@ -2,14 +2,16 @@ import psycopg
 from tabulate import tabulate
 from sshtunnel import SSHTunnelForwarder
 from config.secrets import Secrets as s
+from reports.generate_report import escreva
 class Users:
-     def __init__(self):
-          pass
-     
+     def __init__(self, arquivo):
+          self.arquivo = arquivo
+          print(self.arquivo)
+
+
      def ListUsers(self, conn): 
           cur = conn.cursor()
-          ("\n\n[!] USUÁRIOS ENCONTRADOS:")
-
+          escreva("\n\n ## USUÁRIOS ENCONTRADOS:", self.arquivo)
           try:
                cur.execute(
                    """SELECT rolname FROM pg_roles;"""
@@ -18,7 +20,7 @@ class Users:
                names = [row[0] for row in obj_names]
 
           except Exception as e:
-               print(f'Não foi possível identificar nenhum usuário: Erro {e}')
+               escreva(f'Não foi possível identificar nenhum usuário: Erro {e}', self.arquivo)
           
           return names
      
@@ -32,12 +34,12 @@ class Users:
                )
                superusers = cur.fetchall()
                if superusers:
-                    print("\n\n[!] SUPERUSUÁRIOS ENCONTRADOS:")
-                    print(tabulate(superusers, headers=["Role", "Superuser", "Create Role", "Create DB", "Can Login"]))
+                    escreva("\n\n ## SUPERUSUÁRIOS ENCONTRADOS:", self.arquivo)
+                    escreva(tabulate(superusers, headers=["Role", "Superuser", "Create Role", "Create DB", "Can Login"]), self.arquivo)
                else:
-                    print("\n[+] Nenhum superusuário além do padrão foi encontrado.")
+                    escreva("\n[+] Nenhum superusuário além do padrão foi encontrado.", self.arquivo)
           except Exception as e:
-               print(f"Erro ao escanear tabela de usuários: {e}")
+               escreva(f"Erro ao escanear tabela de usuários: {e}", self.arquivo)
 
           cur.close()
           conn.close()
@@ -46,7 +48,7 @@ class Users:
      def PasswordsSecurity(self, users):
           passwords = ['123', 'admin', 'postgres', 'senha123', '1234', 'adminadmin', '', ' ', 'senha']
           count = 0
-          print('\n\n[!]USUÁRIOS UTILIZANDO SENHA PADRÃO: ')
+          escreva('\n\n ## USUÁRIOS UTILIZANDO SENHA PADRÃO: ', self.arquivo)
           for user in users:
                for pwd in passwords:
                     try:
@@ -56,12 +58,12 @@ class Users:
                               password=pwd,
                               host=s.host_pg
                          )
-                         print(f"\n[!] Usuário '{user}' AUTENTICADO com senha '{pwd}'")
+                         escreva(f"\n[!] Usuário '{user}' AUTENTICADO com senha '{pwd}'", self.arquivo)
                          conn.close()
                          count += 1
                     except Exception:
                          pass
           if count == 0:
-               print('\nNenhum usuário possui senha padrão!')
+               escreva('\nNenhum usuário possui senha padrão!', self.arquivo)
 
 
