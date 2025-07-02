@@ -56,7 +56,7 @@ class Users:
 
 
      def PasswordsSecurity(self, users):
-          passwords = ['123', 'admin', 'postgres', 'senha123', '1234', 'adminadmin', '', ' ', 'senha']
+          passwords = ['123', 'admin', 'postgres', 'senha123', '1234', 'adminadmin', '', ' ']
           count = 0
           escreva('\n\n ## USUÁRIOS UTILIZANDO SENHA PADRÃO: ', self.arquivo)
           for user in users:

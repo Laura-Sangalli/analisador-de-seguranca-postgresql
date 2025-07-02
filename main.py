@@ -10,7 +10,7 @@ from analysis.Users import Users
 from connect.connect_db import create_connection
 from reports.generate_report import criar_arquivo, escreva
 from analysis.InsertDeleteMonitor import *
-
+from analysis.LoginsMonitor import monitorar_logins
 ## Conexão com o banco PostgreSQL e obtenção das informações de segurança. 
 try:
     conn = create_connection()
@@ -47,6 +47,7 @@ try:
     insertMonitor(s.log_path, file_path=arquivo)
     deleteMonitor(s.log_path, arquivo)
 
+    monitorar_logins(s.log_path, arquivo)
 except:
     print('Erro ao conectar ao banco de dados')
 

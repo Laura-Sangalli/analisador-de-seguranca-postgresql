@@ -27,7 +27,7 @@ def buscar_audit(log_path):
         for comando in comandos:
             escreva(f"{comando}")
     else:
-        escreva("❌ Nenhum INSERT ou DELETE encontrado.")
+        escreva(" Nenhum INSERT ou DELETE encontrado.")
 
 def insertMonitor(log_path, file_path):
     lista = []
@@ -37,11 +37,13 @@ def insertMonitor(log_path, file_path):
         for linha in log:
             linha = linha.strip()
             if 'AUDIT:' in linha and 'INSERT INTO' in linha.upper():
-                lista.append(linha[0:16])
+                lista.append(f'{linha[0:13]}h')
+    
+    escreva(f'Foram encontradas {len(lista)} inserções:', file_path)
 
     sns.countplot(x=lista)
     plt.title('INSERÇÕES POR HORA')
-    img_path =  f"output/graphics/grafico_inserts_{datetime.now().strftime('%Y-%m-%d')}.png"
+    img_path =  f"output/graphics/grafico_inserts_{datetime.now().strftime('%Y-%m-%d_%h:%M:%s')}.png"
     plt.savefig(img_path, dpi=300, bbox_inches='tight')  # pasta/arquivo
     mostrar_imagem(img_path=img_path[7:], caminho=file_path)
     plt.show()
@@ -55,12 +57,14 @@ def deleteMonitor(log_path, file_path):
     with open(log_path, 'r', encoding='utf-8') as log:
         for linha in log:
             linha = linha.strip()
-            if 'AUDIT:' in linha and 'INSERT INTO' in linha.upper():
-                lista.append(linha[0:16])
+            if 'AUDIT:' in linha and 'DELETE FROM' in linha.upper():
+                lista.append(f'{linha[0:13]}h')
+
+    escreva(f'Foram encontradas {len(lista)} deleções:', file_path)
 
     sns.countplot(x=lista)
     plt.title('DELEÇÕES POR HORA')
-    img_path =  f"output/graphics/grafico_deletes_{datetime.now().strftime('%Y-%m-%d')}.png"
+    img_path =  f"output/graphics/grafico_deletes_{datetime.now().strftime('%Y-%m-%d_%h:%M:%s')}.png"
     plt.savefig(img_path, dpi=300, bbox_inches='tight')  # pasta/arquivo
     mostrar_imagem(img_path=img_path[7:], caminho=file_path)
     plt.show()

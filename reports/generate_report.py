@@ -31,4 +31,4 @@ def escreva(texto, caminho):
 
 def mostrar_imagem(img_path, caminho):
     with open(caminho, 'a', encoding='utf-8') as arquivo:
-        arquivo.write('\n\n ![Gráfico INSERT](' + img_path + ')')
+        arquivo.write('\n\n ![Gráfico](' + img_path + ')')
