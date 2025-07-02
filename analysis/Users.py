@@ -25,6 +25,9 @@ class Users:
 
           except Exception as e:
                escreva(f'Não foi possível identificar nenhum usuário: Erro {e}', self.arquivo)
+          
+          cur.close()
+          
           return names
           
      
@@ -77,5 +80,6 @@ class Users:
      
           if count == 0:
                escreva('\nNenhum usuário possui senha padrão!', self.arquivo)
+         
           return 
 

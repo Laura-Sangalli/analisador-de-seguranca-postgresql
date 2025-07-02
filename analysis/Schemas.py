@@ -33,7 +33,7 @@ class Schemas:
                 escreva(string, self.arquivo)
                 string = ''
 
-            escreva('\n\n ## PERMISSÕES DE CRIAÇÃO NO SCHEMA ENCONTRADAS:', self.arquivo)
+            escreva('\n\n ## SCHEMAS COM PERMISSÕES DE CRIAÇÃO/DELEÇÃO DE TABELAS:', self.arquivo)
             for i in permissions:
                 string += '- ' + str(i[0]) + '     '
                 escreva(string, self.arquivo)
@@ -42,3 +42,5 @@ class Schemas:
 
         except Exception as e:
             escreva(f'Não foi possível verificar permissões {permissions}: {e}', self.arquivo)
+
+        cur.close()
