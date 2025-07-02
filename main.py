@@ -1,5 +1,3 @@
-# analizador de segurança para banco de dados
-
 import psycopg
 from sshtunnel import SSHTunnelForwarder
 from config.secrets import Secrets as s
@@ -11,7 +9,7 @@ from connect.connect_db import create_connection
 from reports.generate_report import criar_arquivo, escreva
 from analysis.InsertDeleteMonitor import *
 from analysis.LoginsMonitor import monitorar_logins
-## Conexão com o banco PostgreSQL e obtenção das informações de segurança. 
+
 try:
     conn = create_connection()
 except Exception:
@@ -30,12 +28,7 @@ try:
         superusers = users.ScanSuperusers(conn)
     except Exception:
         print(2)
-    # for i in usuarios:
-    #     print(f'{i}\t', end='')
-    #     count += 1
-    #     count = count % 5
-    #     if count == 0:
-    #         print('\n')
+
 
     users.PasswordsSecurity(usuarios)
 
