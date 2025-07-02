@@ -30,3 +30,26 @@
 
 
  ## USUÁRIOS UTILIZANDO SENHA PADRÃO: 
+- Usuário 'postgres' AUTENTICADO com senha 'senha'
+
+
+ ## SCHEMAS ENCONTRADOS:
+- pg_toast     
+- pg_catalog     
+- public     
+- information_schema     
+
+
+ ## PERMISSÕES DE CRIAÇÃO NO SCHEMA ENCONTRADAS:
+- pg_catalog     
+- public     
+- information_schema     
+
+ ## MONITORAMENTO DE INSERÇÕES
+
+
+ ![Gráfico INSERT](output/graphics/grafico_inserts_2025-07-02.png)
+ ## MONITORAMENTO DE DELEÇÕES
+
+
+ ![Gráfico INSERT](output/graphics/grafico_deletes_2025-07-02.png)

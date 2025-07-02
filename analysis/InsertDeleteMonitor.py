@@ -41,9 +41,9 @@ def insertMonitor(log_path, file_path):
 
     sns.countplot(x=lista)
     plt.title('INSERÇÕES POR HORA')
-    img_path =  f"grafico_inserts_{datetime.now().strftime('%Y-%m-%d')}.png"
+    img_path =  f"output/graphics/grafico_inserts_{datetime.now().strftime('%Y-%m-%d')}.png"
     plt.savefig(img_path, dpi=300, bbox_inches='tight')  # pasta/arquivo
-    mostrar_imagem(img_path=img_path, caminho=file_path)
+    mostrar_imagem(img_path=img_path[7:], caminho=file_path)
     plt.show()
 
 
@@ -60,7 +60,7 @@ def deleteMonitor(log_path, file_path):
 
     sns.countplot(x=lista)
     plt.title('DELEÇÕES POR HORA')
-    img_path =  f"grafico_deletes_{datetime.now().strftime('%Y-%m-%d')}.png"
+    img_path =  f"output/graphics/grafico_deletes_{datetime.now().strftime('%Y-%m-%d')}.png"
     plt.savefig(img_path, dpi=300, bbox_inches='tight')  # pasta/arquivo
-    mostrar_imagem(img_path=img_path, caminho=file_path)
+    mostrar_imagem(img_path=img_path[7:], caminho=file_path)
     plt.show()
