@@ -2,4 +2,4 @@ secrets.py
 .venv
 config/secrets.py
 config/
-output/
+output/*
