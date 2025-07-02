@@ -68,7 +68,7 @@ class Users:
                               password=pwd,
                               host=s.host_pg
                          )
-                         escreva(f"- Usuário '{user}' AUTENTICADO com senha '{pwd}'", self.arquivo)
+                         escreva(f"- **Usuário '{user}' AUTENTICADO com senha '{pwd}'**", self.arquivo)
                          conn.close()
                          count += 1
                     except Exception:
