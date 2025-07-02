@@ -7,7 +7,7 @@ Entretanto, mesmo com seu histórico positivo, é fundamental manter o banco sem
 Este trabalho tem como objetivo construir um analisador de segurança para bancos de dados PostgreSQL, que emita relatórios com informações cruciais sobre áreas do SGDB passíveis de ataques, destacando pontos a serem melhorados em questão de segurança.
 
 
-**Este analisador realiza suas atividades subdivididas em quatro etapas, sendo elas:**
+### Este analisador realiza suas atividades subdivididas em quatro etapas, sendo elas:
 
 ## 1. Verificação da situação dos usuários e administradores do banco de dados.
 
