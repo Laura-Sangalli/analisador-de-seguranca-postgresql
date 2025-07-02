@@ -1,3 +1,5 @@
 psycopg 
 SSHTunnel
 tabulate
+matplotlib
+seaborn
