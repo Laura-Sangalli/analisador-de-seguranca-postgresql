@@ -27,7 +27,7 @@ def monitorar_logins(log_path, file_path):
                         "datahora": datahora
                     })
 
-            # Tentativas com falha
+
             elif 'FATAL:' in linha and 'password authentication failed' in linha:
                 match = padrao_falha.search(linha)
                 if match:

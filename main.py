@@ -18,6 +18,7 @@ except Exception:
     print(1)
 
 arquivo = criar_arquivo()
+escreva(f'\n\nBANCO DE DADOS ANALISADO: **{s.db_pg.upper()}**', arquivo)
 
 users = Users(arquivo)
 x = Schemas(arquivo)

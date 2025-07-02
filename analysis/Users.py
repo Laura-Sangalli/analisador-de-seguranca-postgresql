@@ -42,7 +42,7 @@ class Users:
                     tabela = tabela_md = tabulate(
                     superusers,
                     headers=["Role", "Superuser", "Create Role", "Create DB", "Can Login"],
-                    tablefmt="pipe"  # ou "pipe"
+                    tablefmt="pipe" 
                     )
 
                     escreva(tabela, self.arquivo)
