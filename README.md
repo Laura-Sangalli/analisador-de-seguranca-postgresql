@@ -22,4 +22,4 @@ Nessa etapa, são contabilizadas todas as tentativas de login de cada usuário, 
 
 ## 4. Verificação de atividade de inserções e deleções.
 
-Etapa na qual são exibidos gráficos contendo a quantidade de inserções e deleções que ocorreram no gráfico a cada hora. 
+Etapa na qual são exibidos gráficos contendo a quantidade de inserções e deleções que ocorreram no banco de dados a cada hora. 
