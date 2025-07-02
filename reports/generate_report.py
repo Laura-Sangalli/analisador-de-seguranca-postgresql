@@ -28,3 +28,7 @@ def ler_arquivo(caminho):
 def escreva(texto, caminho):
     with open(caminho, 'a', encoding='utf-8') as arquivo:
         arquivo.write(texto + '\n')
+
+def mostrar_imagem(img_path, caminho):
+    with open(caminho, 'a', encoding='utf-8') as arquivo:
+        arquivo.write('\n\n ![Gráfico INSERT](' + img_path + ')')

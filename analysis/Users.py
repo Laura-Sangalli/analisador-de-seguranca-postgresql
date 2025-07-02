@@ -1,7 +1,8 @@
 import psycopg
-from tabulate import tabulate
+import pandas as pd
 from sshtunnel import SSHTunnelForwarder
 from config.secrets import Secrets as s
+from tabulate import tabulate
 from reports.generate_report import escreva
 class Users:
      def __init__(self, arquivo):
@@ -19,10 +20,13 @@ class Users:
                obj_names = cur.fetchall()
                names = [row[0] for row in obj_names]
 
+               for name in names:
+                    escreva(f'- {name}', self.arquivo)
+
           except Exception as e:
                escreva(f'Não foi possível identificar nenhum usuário: Erro {e}', self.arquivo)
-          
           return names
+          
      
      def ScanSuperusers(self, conn):
         names = []
@@ -35,15 +39,21 @@ class Users:
                superusers = cur.fetchall()
                if superusers:
                     escreva("\n\n ## SUPERUSUÁRIOS ENCONTRADOS:", self.arquivo)
-                    escreva(tabulate(superusers, headers=["Role", "Superuser", "Create Role", "Create DB", "Can Login"]), self.arquivo)
+                    tabela = tabela_md = tabulate(
+                    superusers,
+                    headers=["Role", "Superuser", "Create Role", "Create DB", "Can Login"],
+                    tablefmt="pipe"  # ou "pipe"
+                    )
+
+                    escreva(tabela, self.arquivo)
                else:
                     escreva("\n[+] Nenhum superusuário além do padrão foi encontrado.", self.arquivo)
           except Exception as e:
                escreva(f"Erro ao escanear tabela de usuários: {e}", self.arquivo)
 
           cur.close()
-          conn.close()
-          return names
+
+
 
      def PasswordsSecurity(self, users):
           passwords = ['123', 'admin', 'postgres', 'senha123', '1234', 'adminadmin', '', ' ', 'senha']
@@ -58,12 +68,14 @@ class Users:
                               password=pwd,
                               host=s.host_pg
                          )
-                         escreva(f"\n[!] Usuário '{user}' AUTENTICADO com senha '{pwd}'", self.arquivo)
+                         escreva(f"- Usuário '{user}' AUTENTICADO com senha '{pwd}'", self.arquivo)
                          conn.close()
                          count += 1
                     except Exception:
                          pass
+          
+     
           if count == 0:
                escreva('\nNenhum usuário possui senha padrão!', self.arquivo)
-
+          return 
 

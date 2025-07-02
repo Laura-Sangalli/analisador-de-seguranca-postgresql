@@ -1,22 +1,36 @@
 import psycopg
+import re
+from datetime import datetime
+from config.secrets import Secrets as s 
+from reports.generate_report import criar_arquivo, escreva, mostrar_imagem
 
-class LoginMonitor:
-    def __init__(self, host, dbname, user, password, port=5432):
-        self.host = host
-        self.dbname = dbname
-        self.user = user
-        self.password = password
-        self.port = port
+def buscar_audit(log_path, desde_dias=10):
+    print(f"\n[AUDITOR] Lendo logs desde os últimos {desde_dias} dias...\n")
     
-    def connect(self):
-        try:
-            self.conn = psycopg.connect(
-                host=self.host,
-                dbname=self.dbname,
-                user=self.user,
-                password=self.password,
-                port=self.port
-            )
-            self.cur = self.conn.cursor()
-        except Exception as e:
-            print(f"[!] Connection failed: {e}")
+    padrao_audit = re.compile(r'.*AUDIT:.*(ROLE).*statement:\s(.*)', re.IGNORECASE)
+
+    agora = datetime.now()
+    comandos = []
+
+    with open(log_path, 'r', encoding='utf-8') as log:
+        for linha in log:
+            if 'AUDIT:' in linha:
+                resultado = padrao_audit.search(linha)
+                if resultado:
+                    tipo, sql = resultado.groups()
+                    comandos.append((tipo.upper(), sql.strip()))
+
+    if comandos:
+        print("[+] Comandos auditados encontrados:\n")
+        for tipo, sql in comandos:
+            print(f"[{tipo}] → {sql}")
+    else:
+        print("[!] Nenhuma linha AUDIT encontrada no período.")
+
+def insertMonitor(log_path):
+    pass
+
+def deleteMonitor(log_path):
+    pass
+
+

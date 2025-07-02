@@ -9,6 +9,7 @@ from analysis.Schemas import Schemas
 from analysis.Users import Users
 from connect.connect_db import create_connection
 from reports.generate_report import criar_arquivo, escreva
+from analysis.InsertDeleteMonitor import *
 
 ## Conexão com o banco PostgreSQL e obtenção das informações de segurança. 
 try:
@@ -43,7 +44,9 @@ try:
 
     x.verificarPermissaoAcesso(conn)
 
-          
+    insertMonitor(s.log_path, file_path=arquivo)
+    deleteMonitor(s.log_path, arquivo)
+
 except:
     print('Erro ao conectar ao banco de dados')
 
