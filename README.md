@@ -15,6 +15,7 @@ São aqui listados todos os schemas presentes no banco de dados. Além disso, é
 
 ## Monitoramento das atividade de logins (com ou sem sucesso). 
 
+Nessa etapa, são contabilizadas todas as tentativas de login de cada usuário, divididas entre sucesso e fracasso. Essas informações são exibidas em um gráfico.
 
 ## Verificação de atividade de inserções e deleções.
 
