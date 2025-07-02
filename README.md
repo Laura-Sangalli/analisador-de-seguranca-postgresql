@@ -1,4 +1,6 @@
-# Analisador de Segurança de Banco de Dados PostgreSQL
+# Analisador de Segurança para Banco de Dados PostgreSQL
+
+*Este projeto foi desenvolvido como Trabalho Final para a disciplina de Segurança em Aplicações (UTFPR campus Pato Branco).*
 
 O PostgreSQL é um Sistema de Gerenciamento de Bancos de Dados open source, seguro e com desempenho bastante robusto. É muito utilizado por empresas e organizações de todo o mundo devido a sua confiabilidade.
 
